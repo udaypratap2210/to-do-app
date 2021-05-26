@@ -1,0 +1,20 @@
+.style {
+  width: 360px;
+  min-height: 43px;
+  background-color: rgb(247, 68, 247);
+  color: #fff;
+  border-radius: 5px;
+  margin: 10px auto;
+  overflow-wrap: break-word;
+}
+.style p {
+  padding: 8px;
+  position: relative;
+  padding-right: 32px;
+}
+.style p span {
+  position: absolute;
+  right: 5px;
+  bottom: Auto;
+  cursor: pointer;
+}
