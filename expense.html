@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense App</title>
+    <style>
+      .jumbotron {
+        display: flex;
+      }
+      .descriptionItem {
+        margin-left: 60px;
+        margin-right: 60px;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-dark">
+      <span class="navbar-brand mb-0 h1">Expense Manager</span>
+      <span class="navbar-brand mb-0 h1" id="head"></span>
+    </nav>
+    <div class="container-fluid bg-light" style="min-height: 100vh">
+      <div class="container">
+        <div class="jumbotron mt-4">
+          <div class="input-group mb-3">
+            <div class="input-group-append">
+              <span class="input-group-text" id="spent in rupee">₹</span>
+            </div>
+            <input
+              type="text"
+              id="amt"
+              class="form-control"
+              placeholder="Amount spent"
+              aria-label="Amount spent"
+              aria-describedby="spent in rupee"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="spent at">@</span>
+            </div>
+            <input
+              type="text"
+              id="desc"
+              class="form-control"
+              placeholder="spent On"
+              aria-label="spent On"
+              aria-describedby="spent at"
+            />
+            <div class="input-group-append">
+              <button type="button" id="btn">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="lst"></div>
+    </div>
+
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.7.2/js/all.js"
+      integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const desc = document.querySelector("#desc");
+      let allExpense = [];
+      let total = 0;
+
+      function totalExpense() {
+        const expenseItem = [];
+
+        //selecting input value to element 1
+        let inputAmount = parseInt(document.querySelector("#amt").value);
+
+        //assigning input description
+        const inputDesc = desc.value;
+
+        //creating objects
+        expenseItem.desc = inputDesc;
+        expenseItem.amount = inputAmount;
+
+        console.log(expenseItem.length);
+
+        if (inputDesc === "") {
+          alert("Please enter Item!");
+        } else if (!inputAmount) {
+          alert("Please enter Amount!");
+        } else {
+          console.log(expenseItem);
+
+          total += inputAmount;
+          console.log(total);
+
+          //selecting heading to display total
+          const selecthead = document.querySelector("#head");
+          selecthead.textContent = `Total: ${total}`;
+
+          let flag = 0;
+          const result = allExpense.map((item) => {
+            if (item.desc === inputDesc) {
+              flag = 1;
+              item.amount += expenseItem.amount;
+            }
+          });
+
+          if (!flag) allExpense.push(expenseItem);
+          console.clear();
+          console.table(allExpense);
+        }
+        //Creating Date
+        let dateObj = new Date();
+        let options = { year: "numeric", month: "long", day: "numeric" };
+        let date = dateObj.toLocaleDateString("en-US", options);
+
+        const allExpenseTemp = allExpense.map((item) => {
+          return `
+          <div class="descriptionItem">
+            <li class="list-group-item d-flex justify-content-between">
+              <div class="d-flex flex-column">
+                ${item.desc}
+                <small class="text-muted">${date}</small>
+              </div>
+              <div>
+                <span class="px-5"> ${item.amount} </span>
+                <button type="button" onclick="deleteItem()" class="btn btn-outline-danger btn-sm">
+                   <i class="fas fa-trash-alt"></i>
+                </button>
+              </div>
+            </li>
+          </div>`;
+        });
+        function deleteItem() {
+          console.log("delete was called");
+        }
+
+        const allExpenseHtml = allExpenseTemp.join(" ");
+
+        console.log(allExpenseHtml);
+
+        const lstHtml = document.querySelector("#lst");
+        lstHtml.innerHTML = allExpenseHtml;
+      }
+
+      //listen to click event or Enter key
+
+      const addBtn = document.querySelector("#btn");
+
+      // ADDED FOR HANDLING ENTER PRESS....If we use click event then it triggers on space and enter too.
+      //  If we use mouseup then it only works for mouse click
+      // addBtn.addEventListener("keyup", (event) => {
+      //   if (event.keyCode === 16) {
+      //     totalExpense();
+      //   }
+      // });
+
+      addBtn.addEventListener("click", (event) => {
+        totalExpense();
+      });
+    </script>
+  </body>
+</html>
