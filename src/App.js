@@ -26,6 +26,7 @@ export class App extends Component {
     });
   }
   //
+  //
   addItem(a) {
     a.preventDefault();
     const newItem = this.state.currentItem;
