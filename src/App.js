@@ -44,6 +44,10 @@ export class App extends Component {
   //this is new branch
 
   addItem(a) {
+    /////////////////////
+    /////////////////adding neew comment
+    //////
+    /////
     a.preventDefault();
     const newItem = this.state.currentItem;
     console.log(newItem);
