@@ -47,7 +47,21 @@ export class App extends Component {
     /////////////////////
     /////////////////adding neew comment
     //////
-    /////
+    /////this is the latest code
+    /////this is the latest code
+    /////this is the latest code
+    /////this is the latest code
+    /////this is the latest code
+    /////this is the latest code
+    /////this is the latest code
+    /////this is the latest code
+    /////this is the latest code
+    /////this is the latest code
+    /////this is the latest code
+    /////this is the latest code
+    /////this is the latest code
+    /////this is the latest code
+    /////this is the latest code
     a.preventDefault();
     const newItem = this.state.currentItem;
     console.log(newItem);
