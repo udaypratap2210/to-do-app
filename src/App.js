@@ -29,7 +29,7 @@ export class App extends Component {
   //
   addItem(a) {
     /////////////////////
-    /////////////////
+    /////////////////adding neew comment
     //////
     /////
     a.preventDefault();
